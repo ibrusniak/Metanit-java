@@ -26,11 +26,24 @@ public class Datatypes {
         // 2 bytes
         char ch = 200;
 
+        // long
+        var l0 = 1L;
+        var l1 = 2l;
+
+        int num222 = 0x6F; // hex
+        int num223 = 010; // oct
+        int num224 = 0b1101; // bin
+
+        // multiline sttring
+        var mst =
+            """
+                this is
+                    multiline
+                        string...
+            """;
+            
+        System.out.println(mst);
     }
 }
 
-class IntTypes {
-
-    
-}
 
