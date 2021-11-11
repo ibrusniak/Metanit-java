@@ -2,5 +2,8 @@
     "java.project.sourcePaths": [
         "1-intro",
         "2-OOP"
-    ]
+    ],
+    "terminal.explorerKind": "external",
+    "debug.terminal.clearBeforeReusing": true,
+    "java.debug.settings.console": "externalTerminal"
 }
