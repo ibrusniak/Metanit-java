@@ -12,8 +12,5 @@ public class Classes1 {
     }
 }
 
-class MyClass1 {
-
-    
-}
+class MyClass1 {}
 
