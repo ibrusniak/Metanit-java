@@ -1,7 +1,7 @@
 {
     "java.project.sourcePaths": [
         "1-intro",
-        "2-OOP"
+        "OOP"
     ],
     "terminal.explorerKind": "external",
     "debug.terminal.clearBeforeReusing": true,
