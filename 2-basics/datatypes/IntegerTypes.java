@@ -23,6 +23,51 @@ public class IntegerTypes {
         Integer integerVariable2 = Byte.toUnsignedInt(byteVariable);
 
         printVariableInfo(integerVariable2);
+        printVariableInfo(200);
+        printVariableInfo(200l);
+        printVariableInfo(Byte.parseByte("127"));
+
+        // This one does not work. Error: int cannot be converted to Byte
+        // printVariableInfo((Byte)110);
+
+        // but this works properly!..
+        printVariableInfo((byte)120); // 120
+
+        printVariableInfo((byte)127); // 127
+        printVariableInfo((byte)128); // -128 bit grid overflow
+        printVariableInfo((byte)129); // -127
+
+        printVariableInfo((byte)(128 + 128)); // 0
+
+        // 0. Double bit grid overflow
+        printVariableInfo((int)((Integer.MAX_VALUE + 1) + (Integer.MAX_VALUE + 1)));
+
+        Byte byteVariable2 = 0xF;           // Hexadecimal representation
+        printVariableInfo(byteVariable2);
+
+        System.out.println();
+
+        // HEX
+        printVariableInfo(0x9);
+        printVariableInfo(0xA);
+        printVariableInfo(0xB);
+        // ...
+        printVariableInfo(0xF);
+
+        System.out.println();
+
+        // BIN
+        printVariableInfo(0b01);
+        printVariableInfo(0b10);
+        printVariableInfo(0b11);
+
+        System.out.println();
+
+        // OCT
+        printVariableInfo(001);
+        printVariableInfo(010);
+        printVariableInfo(011);
+
     }
 
     private static String getFormattedInformation(Byte b, Short s, Integer i, Long l) {
@@ -42,7 +87,7 @@ public class IntegerTypes {
 
     private static void printVariableInfo(Number n) {
 
-        System.out.printf("Class: %s, value: %s", n.getClass().getSimpleName(), n);
+        System.out.printf("Class: %s, value: %s\n", n.getClass().getSimpleName(), n);
     }
 }
 
