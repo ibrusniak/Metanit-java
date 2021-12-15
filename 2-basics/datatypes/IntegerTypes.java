@@ -4,6 +4,7 @@
  * and convertion from one types to other and vice versa. Demonstrates some
  * common method from wrap-classes (Byte, Short, Integer, Long).
  */
+
 public class IntegerTypes {
 
     public static void main(String[] args) {
