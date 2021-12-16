@@ -21,14 +21,32 @@ public class StringTest1 {
         String stringVariable3 = new String(characterArray);
         prn(stringVariable3);
 
-        
+        String fullString = new String("  \tThis is a full string with few extra spaces\t    ");
+        prn("[" + fullString + "]");
+        prn("[" + fullString.trim() + "]");
+        prn("[" + fullString.trim().substring(10, 14) + "]");
+        prn(fullString.trim().toLowerCase());
+        prn(fullString.trim().toUpperCase());
+        prn("[" + fullString.stripTrailing() + "]");
+        prn("[" + fullString.stripLeading() + "]");
+
+        String sourceString = "This is a full string with few extra spaces 12";
+        String[] matched = sourceString.split("a"); // any symbol
+
+        for(int i = 0; i < matched.length; i++) System.out.print(matched[i] + ":");
+        System.out.println();
+
+        String stringVariable =
+            "This is int: _int and this is float: _float".replaceAll("_int", "200")
+                .replaceAll("_float", "10.2f");
+
+        prn(stringVariable);
     }
 
     private static void prn(Object o) {
 
         System.out.println(o);
     }
-
 }
 
 
