@@ -1,48 +1,17 @@
 
 package main;
 
-import static algorithms.Factorial.*;
+import algorithms.*;
 
 public class Main {
 
     public static void main(String[] args) {
-
-        if(args == null | args.length == 0) return;
-
-        String operation = args[0];
-
-        if(!elementIsInArray(supportedOperation(), operation)) {
-
-            System.out.printf("Unsupported operation [%s]\n", operation);
-        } else {
-
-            switch (operation) {
-
-                case "factorial":
-
-                    try {
-                        int arg = Integer.parseInt(args[1]);
-                        System.out.printf("[%s][%s]: %s", operation, arg, getFactorialRecursively(arg));
-                    } catch (Exception ex) {
-                        System.out.printf("Invalid argument [%s] for operation [%s]\n\n%s", args[1], operation, ex.getMessage());
-                    }
-                    break;
-            }
-
-        }
-    }
-
-    public static String[] supportedOperation() {
         
-        return new String[] { "factorial" };
-    }
+        Factorial f = new Factorial();
 
-    public static boolean elementIsInArray(String[] array, String element) {
+        f.setArguments(new Integer[] { 5 });
 
-        for(String s : array)
-            if(s.equals(element)) return true;
-        
-        return false;
+        System.out.println(f.calculate());
     }
 }
 

@@ -1,34 +1,20 @@
 
 package algorithms;
 
-import java.util.Enumeration;
+public class Factorial extends Algorithm <Integer> implements ICalculable <Long> {
 
-public class Factorial {
+    public Long calculate() {
 
-    public static long getFactorialRecursively(int arg) {
-
-        if(arg <= 0) return 0;
-        if(arg == 1) return 1;
-        return arg * getFactorialRecursively(arg - 1);
+        return factorial(arguments[0]);
     }
 
-    public static long getFactorialWithDoCycle(int arg) {
+    private Long factorial(Integer base) {
 
-        if(arg <= 0) return 0;
+        if(base < 1)
+            throw new IllegalArgumentException("Base cannot be under 1");
 
-        long result = 1;
-        int _arg = arg;
-        do {
-            
-            result *= _arg;
-        } while (--_arg > 1);
-
-        return result;
-    }
-
-    public static String[] getCalculationTypes() {
-
-        return new String[] { "default", "recursively", "with_do_cycle" };
+        if(base == 1) return 1l;
+        return base * factorial(base - 1);
     }
 }
 
