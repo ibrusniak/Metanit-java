@@ -21,10 +21,10 @@ public class Main {
                 case "factorial":
 
                     try {
-                        int arg = Integer.parseInt(args[2]);
-                        System.out.printf("[%s][%s]: ", operation, arg, getFactorialRecursively(arg));
+                        int arg = Integer.parseInt(args[1]);
+                        System.out.printf("[%s][%s]: %s", operation, arg, getFactorialRecursively(arg));
                     } catch (Exception ex) {
-                        System.out.printf("Invalid argument [%s] for operation [%s]\n", args[1], operation);
+                        System.out.printf("Invalid argument [%s] for operation [%s]\n\n%s", args[1], operation, ex.getMessage());
                     }
                     break;
             }
