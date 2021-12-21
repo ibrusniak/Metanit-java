@@ -2,11 +2,12 @@
 package tests;
 
 import static utils.Printer.*; 
+import classes.*;
 
-public class Test3 {
+public class Test3 implements IRunnableTest {
 
-    public Test3() {
-
+    public void run() {
+        
         printMessageTestStarts(this);
     }
 }

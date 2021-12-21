@@ -10,7 +10,7 @@ public class Printer {
 
     public static void printMessageTestStarts(Object o) {
         
-        println("[" + o.getClass().getSimpleName() + "] test start:\n");
+        println("[" + o.getClass().getSimpleName() + "] test start:");
     }
 }
 
