@@ -24,6 +24,7 @@ class Operation {
     }
 
     protected void addArgument(Number[] arguments) {
+        
         for(Number n : arguments) {
             addArgument(n);
         }
@@ -69,7 +70,6 @@ class Operation {
     }
 
     protected void calculate() {}
-
 }
 
 class Factorial extends Operation {
