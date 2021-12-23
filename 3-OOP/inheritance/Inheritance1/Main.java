@@ -4,9 +4,13 @@ public class Main {
     public static void main(String[] args) {
         
         Factorial fac1 = new Factorial(5);
+        Fibonacci fib1 = new Fibonacci(10);
         fac1.printArguments();
+        fib1.printArguments();
         fac1.calculate();
+        fib1.calculate();
         fac1.printResults();
+        fib1.printResults();
     }
 }
 
@@ -64,12 +68,48 @@ class Operation {
     protected void printResults() {
         
         for(Number n : getResults()) {
-            System.out.print(n + "");
+            System.out.print(n + " ");
         }
         System.out.print("\n");
     }
 
     protected void calculate() {}
+}
+
+class Fibonacci extends Operation {
+
+    Fibonacci(Integer argument) {
+        super(argument);
+    }
+
+    @Override public void calculate() {
+        results = getFibonacciSequence((Integer)arguments[0]);
+    }
+
+    private Integer[] getFibonacciSequence(Integer countOfNumbers) {
+
+        if(countOfNumbers <= 1) {
+            return new Integer[] {0};
+        }
+
+        switch (countOfNumbers) {
+            
+            case 1:
+                return new Integer[] {0};
+            case 2:
+                return new Integer[] {0, 1};
+        }
+
+        Integer[] sequence = new Integer[countOfNumbers];
+        sequence[0] = 0;
+        sequence[1] = 1;
+        
+        for(int i = 2; i < sequence.length; i++) {
+            sequence[i] = sequence[i - 1] + sequence[i - 2];
+        }
+
+        return sequence;
+    }
 }
 
 class Factorial extends Operation {
