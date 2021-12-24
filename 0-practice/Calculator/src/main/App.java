@@ -14,8 +14,12 @@ public class App {
         
         Logger logger = new Logger("L0");
         
-        logger.info("application has been started");
+        logger.info("Application has been started");
         
-        logger.info("application has been stoped");
+        Calculator calculator = new Calculator((byte)12);
+
+        
+
+        logger.info("Application has been stoped");
     }
 }

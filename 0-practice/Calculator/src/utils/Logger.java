@@ -24,7 +24,7 @@ public class Logger {
         this.loggerName = loggerName;
         this.messageNumber = 0l;
 
-        this.info("Logger created");
+        this.info("Logger created {" + loggerName + "}");
     }
 
     public void info(String message) {
