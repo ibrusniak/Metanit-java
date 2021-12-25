@@ -5,6 +5,16 @@ import utils.Logger;
 
 /**
  * Calculator - class describes calculator
+ * 
+ * Imaginenative model:
+ * [                 0]
+ * [mc][m+][m-][mr]
+ * [ 7][ 8][ 9][ *][ /]
+ * [ 4][ 5][ 6][ -][  ]
+ * [ 1][ 2][ 3][  ][  ]
+ * [ 0][ .][ n][ +][ =]
+ * 
+ * key "n" means "negative"
  */
 public final class Calculator {
 
@@ -17,7 +27,7 @@ public final class Calculator {
         logger.info("Calculator creted");
     }
 
-    @Override public String getScreenAsString() {
+    public String getScreenAsString() {
         return screen.toString();
     }
 
