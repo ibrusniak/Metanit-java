@@ -17,26 +17,65 @@ public final class Calculator {
         logger.info("Calculator creted");
     }
 
-    class Screen {
+    @Override public String getScreenAsString() {
+        return screen.toString();
+    }
+
+    /**
+     * Screen - class describes calculator's scren. What does it look like?
+     * [0][0][0][0][0][0][0][0][0][0][1] or
+     * [0][0][0][0][0][0][0][0][0][3][5] or
+     * [0][0][0][0][0][0][0][0][0][.][5] or
+     * [0][0][0][0][0][5][3][4][.][2][4] or
+     * Simple array with digits. On those position where are no digits - zero
+     * Decimal dot - take one position, so "digit capacity" is capacity - 1
+     */
+    private class Screen {
+
+        private final char DECIMAL_DOT = '.';
+
+        private char[] screenCells;
+        private byte fullCapacity;
 
         private boolean minusFlag = false;
         private boolean memoryFlag = false;
         private boolean errorFlag = false;
-        private byte[] digits;
-        private byte screenCapacity;
         private Logger logger = Calculator.this.logger;
 
-        private int decimalDotAfterPosition = -1;
+        public Screen(byte digitsCapacity) {
 
-        public Screen(byte screenCapacity) {
+            if(digitsCapacity < 3 || digitsCapacity > 100) {
+                logger.warning("Attempt to create screen with " + digitsCapacity + " digits!");
+                digitsCapacity = 12;
+            }
 
-            digits = new byte[screenCapacity];
-            this.screenCapacity = screenCapacity;
-            logger.info("Calculator's screen created. Number of digits: " + screenCapacity);
+            screenCells = new char[digitsCapacity + 1];
+            fullCapacity = (byte)(digitsCapacity + 1);
+            reset();
+            logger.info("Screen created. Full capacity (with decimal dot): " + fullCapacity);
+        }
+        
+        public void reset() {
+
+            for(byte i = 0; i < screenCells.length; i++) {
+                screenCells[i] = '0';
+            }
+            logger.info("Screen reset");
         }
 
-        public void addDigit(Byte digit) {
-            logger.info("Screen. Add digit " + digit.toString());
+        public boolean isDotPresents() {
+
+            for(byte i = (byte)(screenCells.length - 1); i >= 0; i--) {
+                if (screenCells[i] == DECIMAL_DOT) return true;
+            }
+            return false;
+        }
+
+        public void addDigit(char digit) {
+            if(shiftLeft()) {
+                screenCells[screenCells.length - 1] = digit;
+                logger.info("Screen. Add digit " + Character.toString(digit));
+            }
         }
 
         public void removeDigit() {
@@ -45,16 +84,21 @@ public final class Calculator {
 
         public void setDecimalDigit() {
             
-            if (digits.length == screenCapacity) {
-                logger.warning("Attempt to add dot to full screen");
-            } else if (digits.length == screenCapacity - 1) {
-                logger.warning("Not enought capacity to add digital dot!");
-            } else if (decimalDotAfterPosition == -1) {
-                logger.warning("Attempt to add dot twice");
-            } else {
-                decimalDotAfterPosition = digits.length;
-                logger.info("Decimal dot has been added after position" + digits.length);
+        }
+
+        @Override public String toString() {
+
+            String stringRepresantation
+                = String.format("[%s][%s][%s]",
+                    errorFlag ? "ERR" : "   ",
+                    memoryFlag ? "MEM" : "   ",
+                    minusFlag ? "MINUS" : "     ");
+            
+            for(char ch : screenCells) {
+                stringRepresantation += "[" + Character.toString(ch) + "]";
             }
+
+            return stringRepresantation;
         }
 
         public void setErrorFlag() {
@@ -92,7 +136,27 @@ public final class Calculator {
         public boolean getResetFlag() {
             return memoryFlag;
         }
+    
+        private void shiftRight() {
+
+            for(byte i = (byte)(screenCells.length - 1); i > 0; i--) {
+                screenCells[i] = screenCells[i - 1];
+            }
+            screenCells[0] = '0';
+        }    
+
+        private boolean shiftLeft() {
+
+            if(screenCells[0] != '0' || screenCells[1] == DECIMAL_DOT) {
+                return false;
+            } else {
+
+                for(byte i = 0; i < (byte)(screenCells.length - 2); i++) {
+                    screenCells[i] = screenCells[i + 1];
+                }
+                screenCells[screenCells.length] = '0';
+                return true;
+            }
+        }
     }
-
-
 }

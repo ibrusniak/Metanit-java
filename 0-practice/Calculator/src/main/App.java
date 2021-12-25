@@ -18,7 +18,7 @@ public class App {
         
         Calculator calculator = new Calculator((byte)12);
 
-        
+        println(calculator.getScreenAsString());
 
         logger.info("Application has been stoped");
     }
