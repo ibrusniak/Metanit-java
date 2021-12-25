@@ -18,6 +18,28 @@ import utils.Logger;
  */
 public final class Calculator {
 
+    public enum keys {
+
+        KEY_MEMORY_CLEAR,
+        KEY_MEMORY_PLUS,
+        KEY_MEMORY_MINUS,
+        KEY_MEMORY_RESET,
+
+        KEY_SEVEN, KEY_EIGHT, KEY_NINE,
+        KEY_FOUR, KEY_FIVE, KEY_SIX,
+        KEY_ONE, KEY_TWO, KEY_THREE,
+        KEY_ZERO,
+        
+        KEY_DECIMAL_DOT, KEY_NEGATIVE,
+        
+        KEY_ADDITION,
+        KEY_SUBSTRATION,
+        KEY_MULTIPLICATION,
+        KEY_DIVISION,
+        
+        KEY_RESULT
+    }
+
     private Logger logger = new Logger("CLTOR");
     private Screen screen;
 
