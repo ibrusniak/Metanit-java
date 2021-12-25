@@ -53,6 +53,10 @@ public final class Calculator {
         return screen.toString();
     }
 
+    public void onKeyPress(Calculator.keys key) {
+
+    }
+
     /**
      * Screen - class describes calculator's scren. What does it look like?
      * [0][0][0][0][0][0][0][0][0][0][1] or
