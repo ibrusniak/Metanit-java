@@ -31,6 +31,25 @@ public class Main {
 
         // Normal! Downcasting
         ((ChildClass2)obj).showInfo();
+
+        Object obj1 = new ChildClass2();
+        
+        // True, everyone object
+        // is instance of java.lang.Object
+        if(obj1 instanceof Object) {
+            System.out.println("obj1 is instanse of Object");
+        }
+        
+        // True. ChildClass2 is inherited
+        // from class ParentClass
+        if(obj1 instanceof ParentClass) {
+            System.out.println("obj1 is instanse of ParentClass");
+        }
+
+        // Also true
+        if(obj1 instanceof ChildClass2) {
+            System.out.println("obj1 is instanse of ChildClass2");
+        }
     }
 }
 
