@@ -7,6 +7,9 @@ public class Test2 {
         // to static fields of an interface
         toConsole(Interface1.x);
         toConsole(Interface1.y);
+
+        // Call static method from interface
+        Interface1.sayHello();
     }
 
     public static void toConsole(Object o) {
@@ -21,6 +24,12 @@ interface Interface1 {
 
     // Only public constants are allowed
     // private int z = 300;
+
+    // From JDK 8 we can define static
+    // methods into interface's
+    public static void sayHello() {
+        System.out.println("Hello from Interface's method with body");
+    }
 }
 
 class Class1 implements Interface1 {
