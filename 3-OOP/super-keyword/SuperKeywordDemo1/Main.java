@@ -8,6 +8,9 @@ public class Main {
         println((new ChildClass()).getParentS());
         println((new ChildClass()).getOwnS());
 
+        // 2. 'super' can be used to invoke immediate
+        // parent class method
+        println((new ChildClass()).getParentS2());
     }
 
     static void println(Object o) {
@@ -19,6 +22,9 @@ class ParentClass {
 
     protected String s = "parent";
     
+    public String getOwnS() {
+        return s;
+    }
 }
 
 class ChildClass extends ParentClass {
@@ -31,6 +37,10 @@ class ChildClass extends ParentClass {
 
     public String getParentS() {
         return super.s;
+    }
+
+    public String getParentS2() {
+        return super.getOwnS();
     }
 }
 
