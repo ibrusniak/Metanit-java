@@ -18,6 +18,9 @@ interface Interface1 {
 
     int x = 100;
     public final int y = 200;
+
+    // Only public constants are allowed
+    // private int z = 300;
 }
 
 class Class1 implements Interface1 {
