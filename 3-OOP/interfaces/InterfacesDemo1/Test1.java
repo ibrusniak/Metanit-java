@@ -13,10 +13,20 @@ public class Test1 {
         System.out.println("int1 instanceof Interface1: " + (int1 instanceof Interface1));
         System.out.println("int2 instanceof Class1: " + (int1 instanceof Class1));
         System.out.println("int2 instanceof Interface2: " + (int1 instanceof Interface2));
+
+        // Interface 'inheritance'
+        // Warning: the static field 'intValue' should be
+        // accessed in a static way
+        System.out.println(int1.intValue);
+        System.out.println(int1.STATIC_INT);
     }    
 }
 
-interface Interface1 {}
+interface Interface1 {
+
+    int intValue = 100;
+    final static int STATIC_INT = 500;
+}
 
 interface Interface2 {}
 
