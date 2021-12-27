@@ -19,6 +19,10 @@ public class Test1 {
         // accessed in a static way
         System.out.println(int1.intValue);
         System.out.println(int1.STATIC_INT);
+
+        // 'Static context' for non-static members
+        System.out.println(Class1.getIntValue());
+        System.out.println(Class1.get_STATIC_INT());
     }    
 }
 
@@ -30,5 +34,14 @@ interface Interface1 {
 
 interface Interface2 {}
 
-class Class1 implements Interface1, Interface2 {}
+class Class1 implements Interface1, Interface2 {
+
+    public static int getIntValue() {
+        return intValue;
+    }
+
+    public static int get_STATIC_INT() {
+        return  STATIC_INT;
+    }
+}
 
