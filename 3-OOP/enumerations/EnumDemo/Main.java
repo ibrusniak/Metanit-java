@@ -13,6 +13,10 @@ public class Main {
         for(MyEnumeration1 m : MyEnumeration1.values()) {
             System.out.println(m.getRep());
         }
+
+        for(MyEnumeration2 m : MyEnumeration2.values()) {
+            m.doSomething();
+        }
     }
 }
 
@@ -44,3 +48,19 @@ enum MyEnumeration1 {
         return this.representation;
     }
 }
+
+enum MyEnumeration2 {
+
+    FIRST_CONST {
+        public void doSomething() {
+            System.out.println("FIRST_CONST.doSomething()");
+        }
+    },
+    SECOND_CONST {
+        public void doSomething() {
+            System.out.println("SECOND_CONST.doSomething()");
+        }
+    };
+    public abstract void doSomething();
+}
+
