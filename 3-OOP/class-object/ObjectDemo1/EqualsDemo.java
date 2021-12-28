@@ -23,6 +23,10 @@ class MyClass {
 
     @Override
     public boolean equals(Object obj) {
+
+        if(!(obj instanceof MyClass)) {
+            return false;
+        } 
         return this.i == ((MyClass)obj).i;
     }
 }
