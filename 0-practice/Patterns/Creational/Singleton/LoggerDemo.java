@@ -1,4 +1,3 @@
-import javax.xml.stream.events.StartDocument;
 
 public class LoggerDemo {
 
