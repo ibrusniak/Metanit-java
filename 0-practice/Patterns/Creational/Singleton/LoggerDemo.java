@@ -1,3 +1,4 @@
+import javax.xml.stream.events.StartDocument;
 
 public class LoggerDemo {
 
@@ -11,9 +12,9 @@ final class Logger {
 
     private Logger() {};
 
-    private Logger logger;
+    private static Logger logger;
 
-    public Logger getLogger() {
+    public static Logger getLogger() {
 
         if(logger == null) {
             logger = new Logger();
