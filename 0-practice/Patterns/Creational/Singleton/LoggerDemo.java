@@ -13,12 +13,22 @@ final class Logger {
 
     private static Logger logger;
 
+    private Logger.Level level =
+        Logger.Level.OFF;
+
     public static Logger getLogger() {
 
         if(logger == null) {
             logger = new Logger();
         }
         return logger;
+    }
+
+    public enum Level {
+        INFO,
+        WARNING,
+        ERROR,
+        OFF
     }
 }
 
