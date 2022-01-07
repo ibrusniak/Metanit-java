@@ -6,9 +6,9 @@ public class Main {
 
     public static void main(String[] args) {
         
-        PseudoGeneric pg0 = new PseudoGeneric(100);
-        PseudoGeneric pg1 = new PseudoGeneric(3.4f);
-        PseudoGeneric pg2 = new PseudoGeneric(new Object());
+        PseudoGenericClass pg0 = new PseudoGenericClass(100);
+        PseudoGenericClass pg1 = new PseudoGenericClass(3.4f);
+        PseudoGenericClass pg2 = new PseudoGenericClass(new Object());
 
         try {
             
@@ -33,14 +33,29 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+        GenericClass<Integer> g1 = new GenericClass<>(20);
+        GenericClass<Float> g2 = new GenericClass<>(3.14f);
+        GenericClass<Object> g3 = new GenericClass<>(new Object());
+
+        System.out.println("***");
+
+        // COMPILATION ERROR!
+        // error: incompatible types:
+        //    GenericClass<Object> cannot be converted to GenericClass<Integer>
+        // g1 = g3;
+
+        // COMPILATION ERROR!
+        // incompatible types: Float cannot be converted to int
+        // int d = (int)g2.getPrivateField();
     }
 }
 
-class PseudoGeneric {
+class PseudoGenericClass {
 
     private Object privateField;
 
-    public PseudoGeneric(Object o) {
+    public PseudoGenericClass(Object o) {
         privateField = o;
     }
 
@@ -49,4 +64,16 @@ class PseudoGeneric {
     }
 }
 
+class GenericClass<Type> {
+
+    private Type privateField;
+
+    public GenericClass(Type t) {
+        privateField = t;
+    }
+
+    public Type getPrivateField() {
+        return privateField;
+    }
+}
 
