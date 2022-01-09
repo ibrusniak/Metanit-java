@@ -1,5 +1,7 @@
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.function.Consumer;
 
 /**
  * Main.java. Demonstrates common operations
@@ -9,11 +11,12 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        
+
         ArrayList<Testable> tests = new ArrayList<>(20);
 
         tests.add(new ArrayListTest1());
         tests.add(new ArrayListTest2());
+        tests.add(new ArrayListTest3());
 
         Tester<Testable> tester = new Tester<>(tests);
         tester.runAllTests();
@@ -29,7 +32,7 @@ class Tester<T extends Testable> {
     }
 
     public void runAllTests() {
-        for(T test : tests) {
+        for (T test : tests) {
             test.run();
         }
     }
@@ -63,7 +66,7 @@ class ArrayListTest1 implements Testable {
         println(list.size()); // 0
         println(list.isEmpty());
 
-        for(int i = 76; i > 30; i--) {
+        for (int i = 76; i > 30; i--) {
             list.add(i);
         }
 
@@ -104,5 +107,59 @@ class ArrayListTest2 implements Testable {
         println(al1);
 
         lf();
+    }
+}
+
+class ArrayListTest3 implements Testable {
+
+    @Override
+    public void run() {
+
+        lf();
+        println("Use iterator() method");
+
+        ArrayList<Number> al = new ArrayList<>(5);
+
+        al.add(4);
+        al.add(3);
+        al.add(6f);
+        al.add(3d);
+        al.add(1);
+
+        println(al.size());
+        println(al);
+
+        Iterator<Number> iterator = al.iterator();
+
+        while (iterator.hasNext()) {
+            println(iterator.next());
+        }
+
+        // println(iterator.next()); // Exc. iterator is 'on the end'
+
+        lf();
+        ArrayList<Integer> al2 = new ArrayList<>();
+        al2.add(20);
+        al2.add(30);
+        al2.add(40);
+
+        println(al2);
+
+        Iterator<Integer> iterator2 = al2.iterator();
+        MyConsumer consumer = new MyConsumer();
+
+        while (iterator2.hasNext()) {
+            consumer.accept(iterator2.next());
+        }
+
+        lf();
+    }
+}
+
+class MyConsumer implements Consumer<Integer> {
+
+    @Override
+    public void accept(Integer t) {
+        System.out.println("accept called with: " + t);
     }
 }
