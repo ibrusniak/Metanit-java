@@ -13,6 +13,7 @@ public class Main {
         ArrayList<Testable> tests = new ArrayList<>(20);
 
         tests.add(new ArrayListTest1());
+        tests.add(new ArrayListTest2());
 
         Tester<Testable> tester = new Tester<>(tests);
         tester.runAllTests();
@@ -68,6 +69,40 @@ class ArrayListTest1 implements Testable {
 
         println(list.size());
         println(list.get(0));
+        lf();
+    }
+}
+
+class ArrayListTest2 implements Testable {
+
+    @Override
+    public void run() {
+
+        lf();
+        println("Use addAll(Collection<? extends E> col)");
+
+        ArrayList<Number> al1 = new ArrayList<>();
+
+        ArrayList<Float> al2 = new ArrayList<>();
+        al2.add(2.3f);
+        al2.add(0.24f);
+
+        al1.addAll(al2);
+        println(al1);
+        println(al2);
+
+        lf();
+        al1.add(33f);
+        al1.add(40f);
+
+        println(al1);
+        al1.retainAll(al2);
+        println(al1);
+        al1.remove(2.3f);
+        println(al1);
+        al1.clear();
+        println(al1);
+
         lf();
     }
 }
