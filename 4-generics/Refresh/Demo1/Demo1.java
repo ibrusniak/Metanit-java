@@ -17,6 +17,13 @@ public class Demo1 {
             new SimpleImplementator1(978);
         
         obj3.showTypeInfo(obj3.getVariable());
+
+        System.out.println();
+
+        SimpleImplementator2<String> obj4
+            = new SimpleImplementator2<>("variable");
+        
+        obj4.showTypeInfo(obj4.getT());
     }
 }
 
@@ -113,6 +120,19 @@ class SimpleImplementator1 implements GenericInterface<Integer> {
 
     public Integer getVariable() {
         return variable;
+    }
+}
+
+class SimpleImplementator2<T> implements GenericInterface<T> {
+
+    private T t;
+
+    public SimpleImplementator2(T t) {
+        this.t = t;
+    }
+
+    public T getT() {
+        return t;
     }
 }
 
