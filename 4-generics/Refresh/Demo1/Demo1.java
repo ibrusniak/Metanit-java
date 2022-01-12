@@ -10,6 +10,13 @@ public class Demo1 {
 
         System.out.print(obj1);
         System.out.print(obj2);
+
+        System.out.println();
+
+        SimpleImplementator1 obj3 =
+            new SimpleImplementator1(978);
+        
+        obj3.showTypeInfo(obj3.getVariable());
     }
 }
 
@@ -74,3 +81,39 @@ class GenericClassWithTwoParameters<T, V> {
                 getClass().getName(), hashCode(), variable1, variable2);
     }
 }
+
+/**
+ * Generic interface
+ */
+interface GenericInterface<T> {
+
+    public default void showTypeInfo(T variable) {
+        System.out.printf("[%s@%s] value = %s", variable.getClass().getName(),
+            variable.hashCode(),
+            variable);
+    }
+}
+
+/**
+ * Strategy 1. Simple class implements generic interface
+ * with specified type (specific version of generic interface)
+ */
+class SimpleImplementator1 implements GenericInterface<Integer> {
+
+    private Integer variable;
+
+    SimpleImplementator1(Integer variable) {
+        this.variable = variable;
+    }
+
+    @Override
+    public void showTypeInfo(Integer variable) {
+        GenericInterface.super.showTypeInfo(variable);
+    }
+
+    public Integer getVariable() {
+        return variable;
+    }
+}
+
+
