@@ -26,9 +26,27 @@ public class Main {
         System.out.println(list3);
         System.out.println(list4);
 
+        System.out.println();
+
+        Collections.addAll(list2, "1", "2", "3", "4", "5");
+        println(list2.size());
+        String[] array = new String[]{};
+        array = list2.toArray(array);
+        for(String s : array)
+            System.out.print(s + " ");
+        println();
+
+        
+    }
+
+    public static void println() {
+        System.out.println();
+    }
+
+    public static <T> void println(T object) {
+        System.out.println(object);
     }
 }
-
 
 
 
