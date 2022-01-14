@@ -1,11 +1,15 @@
 
 
-public interface RunnableTest {
+public interface RunnableTest extends Printable {
     
     public default void showTestInfo() {
-        System.out.println("*** test: " + this);
+        System.out.printf("*** test: %s\n", this);
     }
 
+    public default void showTestInfo(String shortDesc) {
+        System.out.printf("*** test: %s %s\n", this, shortDesc);
+    }
+    
     public void runTest();
 }
 
