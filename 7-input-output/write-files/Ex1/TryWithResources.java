@@ -1,15 +1,18 @@
-import java.io.DataInputStream;
+
+import java.util.Scanner;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Random;
+import java.util.stream.Stream;
 
 public class TryWithResources {
 
     public static void main(String[] args) {
-        
+
         Random rnd = new Random();
         String fileName = String.format("testFile%s", rnd.nextInt(1025));
         File file = new File(fileName);
+        Scanner scanner = new Scanner(System.in);
 
         try {
             file.createNewFile();
@@ -18,20 +21,23 @@ public class TryWithResources {
             return;
         }
 
-        FileOutputStream fos = new FileOutputStream(file);
-        DataInputStream dis = new DataInputStream(System.in);
-        
         String input = "";
 
-        while (input != "halt") {
+        try (FileOutputStream fos = new FileOutputStream(file)) {
 
-            input = dis.readUTF();
+            while (!input.equals("exit")) {
+
+                input = scanner.nextLine();
+                String stringToWrite = input + "\n";
+                fos.write(stringToWrite.getBytes());
+            }
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+            System.exit(0);
         }
 
-        fos.close();
-        dis.close();
     }
 }
-
 
 
