@@ -10,6 +10,7 @@ public class TryAndTryWithResourcesDemo {
     public static void main(String[] args) {
     
         demonstrateOpenStreamRegularSyntax();
+        demonstrateOpenStreamTryCatchResources();
     }
 
     public static void demonstrateOpenStreamRegularSyntax() {
@@ -37,6 +38,19 @@ public class TryAndTryWithResourcesDemo {
             }
         } else {
             logger.info("file reader stream does not need to be closed");
+        }
+    }
+
+    public static void demonstrateOpenStreamTryCatchResources() {
+
+        final String FILE_NAME = "doesNotExixts.tmp";
+        File file = new File(FILE_NAME);
+
+        try (FileReader fileReader = new FileReader(file)) {
+            logger.info("File stream opened");
+        } catch (Exception e) {
+            logger.severe("Could not open file reader stream");
+            e.printStackTrace();
         }
     }
 }
