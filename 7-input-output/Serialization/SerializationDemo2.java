@@ -33,15 +33,17 @@ class MyClass implements Serializable {
 
     private int i;
     private String s;
+    transient private String transientMember;
 
     public MyClass(int i, String s) {
         this.i = i;
         this.s = s;
+        this.transientMember = "Transient member (" + s + ")";
     }
 
     @Override
     public String toString() {
-        return String.format("instance: %s; i = %s, s = %s", super.toString(), i, s);
+        return String.format("instance: %s; i = %s, s = %s, transientMember = %s", super.toString(), i, s, transientMember);
     }
 }
 
