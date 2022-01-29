@@ -1,3 +1,6 @@
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -21,7 +24,7 @@ public class SerializationDemo2 {
     }    
 }
 
-class MyClass {
+class MyClass implements Serializable {
 
     private int i;
     private String s;
@@ -66,9 +69,63 @@ public class Test2 implements ITestable {
     @Override
     public void runTest() {
 
+        final String FNAME = "f1.tmp";
+        
         printBeginTest();
-
+        
+        putObjectsToFile(FNAME, 
+            200,
+            2.33f,
+            "БлаБлаБла, кириллица",
+            new MyClass(20, "STRING_LITERAL")
+        );
+        
         printEndTest();
+    }
+    
+    private void putObjectsToFile(String fileName, Object... args) {
+        
+        FileOutputStream fileOStream = null;
+        ObjectOutputStream objectOStream = null;
+        
+        try {
+            fileOStream = new FileOutputStream(fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            objectOStream = new ObjectOutputStream(fileOStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        for (Object o : args) {
+            
+            try {
+                objectOStream.writeObject(o);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        if (fileOStream != null) {
+            
+            try {
+                fileOStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        if (objectOStream != null) {
+            
+            try {
+                objectOStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 
