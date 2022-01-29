@@ -1,5 +1,10 @@
+import java.io.Closeable;
+import java.io.EOFException;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -7,7 +12,7 @@ import java.util.Iterator;
 public class SerializationDemo2 {
 
     public static void main(String[] args) {
-    
+
         System.out.println(new MyClass(10, "str77").toString());
         System.out.println(new MyClass(5, "str23").toString());
 
@@ -18,17 +23,17 @@ public class SerializationDemo2 {
 
         Iterator<ITestable> iterator = list.iterator();
 
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             iterator.next().runTest();
         }
-    }    
+    }
 }
 
 class MyClass implements Serializable {
 
     private int i;
     private String s;
-    
+
     public MyClass(int i, String s) {
         this.i = i;
         this.s = s;
@@ -70,9 +75,9 @@ public class Test2 implements ITestable {
     public void runTest() {
 
         final String FNAME = "f1.tmp";
-        
+
         printBeginTest();
-        
+
         ArrayList<Object> list = new ArrayList<>();
 
         list.add(200);
@@ -81,57 +86,84 @@ public class Test2 implements ITestable {
         list.add(new MyClass(20, "STRING_LITERAL"));
 
         putObjectsToFile(FNAME, list);
-        
+
+        getObjectsFromFile(FNAME);
+
         printEndTest();
     }
-    
+
     private void putObjectsToFile(String fileName, ArrayList list) {
-        
+
         FileOutputStream fileOStream = null;
         ObjectOutputStream objectOStream = null;
-        
+
         try {
+
             fileOStream = new FileOutputStream(fileName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        try {
             objectOStream = new ObjectOutputStream(fileOStream);
         } catch (Exception e) {
+
             e.printStackTrace();
+            return;
         }
-        
 
         Iterator<Object> iterator = list.iterator();
         while (iterator.hasNext()) {
-            
+
             try {
                 Object o = iterator.next();
                 objectOStream.writeObject(o);
-                System.out.println("Object placad into file: " + o.getClass().getSimpleName() + ", " + o);
+                System.out.println("Object placed into file: " + o.getClass().getSimpleName() + ", " + o);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+
+        closeAllStreams(fileOStream, objectOStream);
+    }
+
+    private void getObjectsFromFile(String fileName) {
         
-        if (fileOStream != null) {
+        FileInputStream fileIStream = null;
+        ObjectInputStream objectIStream = null;
+        OutputStreamWriter oStreamWriter = null;
+
+        try {
+
+            fileIStream = new FileInputStream(fileName);
+            objectIStream = new ObjectInputStream(fileIStream);
+            oStreamWriter = new OutputStreamWriter(System.out, "UTF-8");
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            return;
             
-            try {
-                fileOStream.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
-        
-        if (objectOStream != null) {
-            
+
+        try {        
+            Object o = null;
+            while((o = objectIStream.readObject()) != null) {
+                System.out.println("readed object:  " + o.getClass().getName() + ", " + o);
+            }
+        } catch (EOFException e) {
+            // Do nothing. It is normal
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        closeAllStreams(fileIStream, objectIStream, oStreamWriter);
+    }
+
+    private void closeAllStreams(Closeable... streams) {
+
+        for (Closeable stream : streams) {
+
             try {
-                objectOStream.close();
+                stream.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 }
-
