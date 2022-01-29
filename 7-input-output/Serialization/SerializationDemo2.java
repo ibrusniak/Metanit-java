@@ -36,6 +36,7 @@ class MyClass implements Serializable {
     transient private String transientMember;
 
     public MyClass(int i, String s) {
+
         this.i = i;
         this.s = s;
         this.transientMember = "Transient member (" + s + ")";
@@ -66,7 +67,6 @@ public class Test1 implements ITestable {
     public void runTest() {
 
         printBeginTest();
-
         printEndTest();
     }
 }
@@ -88,9 +88,7 @@ public class Test2 implements ITestable {
         list.add(new MyClass(20, "STRING_LITERAL"));
 
         putObjectsToFile(FNAME, list);
-
         getObjectsFromFile(FNAME);
-
         printEndTest();
     }
 
@@ -169,3 +167,4 @@ public class Test2 implements ITestable {
         }
     }
 }
+
