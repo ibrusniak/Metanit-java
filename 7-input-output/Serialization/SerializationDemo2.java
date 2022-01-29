@@ -73,17 +73,19 @@ public class Test2 implements ITestable {
         
         printBeginTest();
         
-        putObjectsToFile(FNAME, 
-            200,
-            2.33f,
-            "БлаБлаБла, кириллица",
-            new MyClass(20, "STRING_LITERAL")
-        );
+        ArrayList<Object> list = new ArrayList<>();
+
+        list.add(200);
+        list.add(2.33f);
+        list.add("БлаБлаБла, кириллица");
+        list.add(new MyClass(20, "STRING_LITERAL"));
+
+        putObjectsToFile(FNAME, list);
         
         printEndTest();
     }
     
-    private void putObjectsToFile(String fileName, Object... args) {
+    private void putObjectsToFile(String fileName, ArrayList list) {
         
         FileOutputStream fileOStream = null;
         ObjectOutputStream objectOStream = null;
@@ -100,10 +102,14 @@ public class Test2 implements ITestable {
             e.printStackTrace();
         }
         
-        for (Object o : args) {
+
+        Iterator<Object> iterator = list.iterator();
+        while (iterator.hasNext()) {
             
             try {
+                Object o = iterator.next();
                 objectOStream.writeObject(o);
+                System.out.println("Object placad into file: " + o.getClass().getSimpleName() + ", " + o);
             } catch (Exception e) {
                 e.printStackTrace();
             }
