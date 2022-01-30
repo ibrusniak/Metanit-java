@@ -12,7 +12,7 @@ public class Demo0 {
         printer.print(new Object());
 
         try {
-            
+
             printer = null;
             printer.print(new Object());
         }
@@ -20,12 +20,26 @@ public class Demo0 {
 
             (printer = object -> System.out.println(object))
                 .print("Couldn't print. Null!");
-            e.printStackTrace();
+            printer.print(e.getMessage());
         }
+
+        UnaryCalculator<Integer> sqr = n -> (double)(n * n);
+        printer.print(sqr.calculate(2));
+        printer.print(sqr.calculate(3));
+        printer.print(sqr.calculate(4));
+
+        UnaryCalculator<Double> div = (i) -> (double)(i / 3.33d);
+        printer.print(div.calculate(10d));
+        printer.print(div.calculate(20d));
+        printer.print(div.calculate(333d));
     }
 }
 
 interface Printer {
     public void print(Object o);
+}
+
+interface UnaryCalculator<T extends Number> {
+    public Double calculate(T arg);
 }
 
