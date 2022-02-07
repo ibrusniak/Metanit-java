@@ -15,6 +15,9 @@ public class LambdaDemo0 {
 
         f1 = () -> System.out.println("3");
         f1.noMatterWhatNameIs();
+
+        SomeUnaryMathOperation sqrt = n -> Math.sqrt(n);
+        System.out.println(sqrt.execute(25d));
     }
 }
 
@@ -22,4 +25,7 @@ interface FunctionalInterface {
     public void noMatterWhatNameIs();
 }
 
+interface SomeUnaryMathOperation {
+    public Double execute(Double argument);
+}
 
