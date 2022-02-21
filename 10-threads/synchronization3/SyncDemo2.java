@@ -1,5 +1,4 @@
 
-
 public class SyncDemo2 {
 
     public static void main(String[] args) {
@@ -22,15 +21,18 @@ class Worker implements Runnable {
 
     public void run() {
 
-        Thread t = Thread.currentThread();
+        synchronized (resource) {
+            Thread t = Thread.currentThread();
 
-        for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 5; i++) {
 
-            System.out.println(t.getName() + " " + resource.x);
-            resource.x++;
-            try {
-                t.sleep(300);
-            } catch (InterruptedException e) {}
+                System.out.println(t.getName() + " " + resource.x);
+                resource.x++;
+                try {
+                    t.sleep(300);
+                } catch (InterruptedException e) {
+                }
+            }
         }
     }
 }
@@ -38,5 +40,3 @@ class Worker implements Runnable {
 class Resource {
     int x;
 }
-
-
