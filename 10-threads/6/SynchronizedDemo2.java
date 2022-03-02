@@ -52,16 +52,18 @@ class Incrementer extends Thread {
     @Override
     public void run() {
         
-        Thread ct = Thread.currentThread();
-        System.out.println(ct.getName() + " has began. Resource = " + resource);
-        for (int i = 0; i < 3; i++) {
-            resource.increment();
-            try {
-                sleep(300);
-            } catch (InterruptedException e) {}
-            System.out.println(ct.getName() + " has incremented resource. Resource = " + resource);
+        synchronized (resource) {
+            Thread ct = Thread.currentThread();
+            System.out.println(ct.getName() + " has began. Resource = " + resource);
+            for (int i = 0; i < 3; i++) {
+                resource.increment();
+                try {
+                    sleep(300);
+                } catch (InterruptedException e) {}
+                System.out.println(ct.getName() + " has incremented resource. Resource = " + resource);
+            }
+            System.out.println(ct.getName() + " has ended. Resource = " + resource);
         }
-        System.out.println(ct.getName() + " has ended. Resource = " + resource);
     }
 }
 
