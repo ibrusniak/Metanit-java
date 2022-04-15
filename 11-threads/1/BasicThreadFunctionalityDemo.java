@@ -9,6 +9,11 @@ public class BasicThreadFunctionalityDemo {
         System.out.println(t0);
         t0.setName("myThread0");
         System.out.println(t0);
+        System.out.println("main thread works");
+        Thread t1 = new UThread();
+        t1.start();
+        t1.join();
+        System.out.println("main thread has ended");
     }
 }
 
