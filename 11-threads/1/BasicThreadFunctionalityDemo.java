@@ -12,7 +12,9 @@ public class BasicThreadFunctionalityDemo {
         System.out.println("main thread works");
         Thread t1 = new UThread();
         t1.start();
-        t1.join();
+        try {
+            t1.join();
+        } catch (InterruptedException e) {}
         System.out.println("main thread has ended");
     }
 }
