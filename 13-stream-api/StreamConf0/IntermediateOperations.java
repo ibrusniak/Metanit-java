@@ -13,6 +13,10 @@ public class IntermediateOperations {
         showFlatMap1();
         System.out.println();
         showFlatMap2();
+        System.out.println();
+        showFlatMap3();
+        System.out.println();
+        showFlatMap4();
     }
 
     private static void showFlatMap1() {
@@ -39,6 +43,21 @@ public class IntermediateOperations {
             .forEach(c -> System.out.print(c + "  "));
         
         System.out.println();
+    }
+
+    private static void showFlatMap3() {
+
+        Stream.of("one two three".split(" "))
+            .flatMap(n -> Stream.of(n.split("")))
+            .forEach(n -> System.out.print(n + " "));
+        System.out.println();
+    }
+
+    private static void showFlatMap4() {
+
+        Stream.of(1, 2, 3)
+            .flatMap(n -> Stream.of(n, n + 1, n + 2))
+            .forEach(n -> System.out.print(n + " "));
     }
 }
 
