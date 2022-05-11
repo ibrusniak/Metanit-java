@@ -17,6 +17,8 @@ public class IntermediateOperations {
         showFlatMap3();
         System.out.println();
         showFlatMap4();
+        System.out.println();
+        showFlatMap5();
     }
 
     private static void showFlatMap1() {
@@ -58,6 +60,17 @@ public class IntermediateOperations {
         Stream.of(1, 2, 3)
             .flatMap(n -> Stream.of(n, n + 1, n + 2))
             .forEach(n -> System.out.print(n + " "));
+    }
+
+    private static void showFlatMap5() {
+
+        Stream.of("""
+                    This is
+                    miltiline string
+                    with cariage returns
+                    """.split("\n"))
+                    .flatMap(x -> Stream.of(x.split(" ")))
+                    .forEach(System.out::println);
     }
 }
 
