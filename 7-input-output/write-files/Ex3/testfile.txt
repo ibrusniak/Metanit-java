@@ -1,9 +1,0 @@
-this is new file
-java program write lines here
-OK!
-Проверка верности работы настроек кодировок
-Перевірка вірності роботи кодувань
-anough
-foo
-bar
-baz
