@@ -8,7 +8,4 @@ public class Child extends Parent {
     public void someMethod() {
         println("Child.someMethod()");
     }
-    public void someMethod2(String s) {
-        println("Child.someMethod2() overloaded " + s);
-    }
 }

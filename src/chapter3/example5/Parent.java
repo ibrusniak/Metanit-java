@@ -7,7 +7,4 @@ public class Parent {
     public void someMethod() {
         println("Parent.someMethod()");
     }
-    public void someMethod2() {
-        println("Parent.someMethod2()");
-    }
 }
