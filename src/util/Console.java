@@ -2,7 +2,7 @@ package util;
 
 public class Console {
 
-    public static <T> void printf(String pattern, T... args) {
+    public static void printf(String pattern, Object... args) {
         System.out.printf(pattern, args);
     }
     public static <T> void print(T o) {
