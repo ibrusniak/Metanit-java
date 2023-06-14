@@ -1,9 +1,5 @@
 package chapter8.example11;
 
-import static util.Console.*;
-
-import java.util.function.Consumer;
-
 public class SomeClass2 {
 
     public static class StaticNestedClass1 {
